@@ -17,4 +17,3 @@ export default function createIteratorObject(report) {
     [Symbol.iterator]: () => this.next(),
   };
 }
-

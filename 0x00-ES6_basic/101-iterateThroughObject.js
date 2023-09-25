@@ -8,4 +8,3 @@ export default function iterateThroughObject(reportWithIterator) {
   }
   return res.slice(0, res.length - 3);
 }
-
