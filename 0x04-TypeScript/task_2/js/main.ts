@@ -1,48 +1,36 @@
-interface Student {
-    firstName: string,
-    lastName: string,
-    age: number,
-    location: string
+interface DirectorInterface {
+    workFromHome(): string
+
+    getCoffeeBreak(): string
+
+    workDirectorTasks(): string
 }
 
-const [student1, student2] = [
-    {
-        firstName: "Gon",
-        lastName: "Freecs",
-        age: 12,
-        location: "New-York"
-    },
-    {
-        firstName: "Suzan",
-        lastName: "Storm",
-        age: 30,
-        location: "Amsterdam"
-    }
-]
+interface TeacherInterface {
+    workFromHome(): string
 
-const studentsList: Array<Student> = [student1, student2];
+    getCoffeeBreak(): string
 
-const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
-const table: HTMLTableElement = document.createElement("table");
-const thead: HTMLTableSectionElement = document.createElement("thead");
-const tbody: HTMLTableSectionElement = document.createElement("tbody");
-const rowHead: HTMLTableRowElement = thead.insertRow(0);
-const firstCellHead: HTMLTableCellElement = rowHead.insertCell(0);
-const secondCellHead: HTMLTableCellElement = rowHead.insertCell(1);
+    workTeacherTasks(): string
+}
 
-firstCellHead.innerHTML = "firstName";
-secondCellHead.innerHTML = "location";
-table.append(thead);
+export class Director implements DirectorInterface {
 
+    getCoffeeBreak = (): string => "Getting a coffee break";
 
-studentsList.forEach(student => {
-    const row: HTMLTableRowElement = tbody.insertRow(0);
-    const firstCell: HTMLTableCellElement = row.insertCell(0);
-    const secondCell: HTMLTableCellElement = row.insertCell(1);
+    workDirectorTasks = (): string => "Getting to director tasks";
 
-    firstCell.innerHTML = student.firstName;
-    secondCell.innerHTML = student.location;
-});
+    workFromHome = (): string => "Working from home";
 
-table.append(tbody);
-body.append(table);
+}
+
+export class Teacher implements TeacherInterface {
+    getCoffeeBreak = (): string => "Cannot have a break";
+
+    workFromHome = (): string => "Cannot work from home";
+
+    workTeacherTasks = (): string => "Getting to work";
+
+}
+
+export const createEmployee = (salary: number | string): Teacher | Director => Number(salary) < 500 ? new Teacher() : new Director();
